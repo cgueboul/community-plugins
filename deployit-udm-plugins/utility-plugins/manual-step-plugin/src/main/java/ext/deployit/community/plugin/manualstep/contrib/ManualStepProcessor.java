@@ -20,16 +20,16 @@ import static com.google.common.collect.Maps.newHashMap;
 public class ManualStepProcessor {
 
     @PrePlanProcessor
-    public List<Step> triggerManualStepsForPrePlanProcessor(DeltaSpecification deltaSpec) {
+    public static List<Step> triggerManualStepsForPrePlanProcessor(DeltaSpecification deltaSpec) {
         return triggerManualSteps(deltaSpec, ContributorType.ONCE_AT_THE_START);
     }
 
     @PostPlanProcessor
-    public List<Step> triggerManualStepsForPostPlanProcessor(DeltaSpecification deltaSpec) {
+    public static List<Step> triggerManualStepsForPostPlanProcessor(DeltaSpecification deltaSpec) {
         return triggerManualSteps(deltaSpec, ContributorType.ONCE_AT_THE_END);
     }
 
-    private List<Step> triggerManualSteps(DeltaSpecification deltaSpec, ContributorType contributorType) {
+    private static List<Step> triggerManualSteps(DeltaSpecification deltaSpec, ContributorType contributorType) {
         Map<String, Object> commonVars = newHashMap();
         commonVars.put("deltas", deltaSpec.getDeltas());
         commonVars.put("deployedApplication", deltaSpec.getDeployedApplication());
