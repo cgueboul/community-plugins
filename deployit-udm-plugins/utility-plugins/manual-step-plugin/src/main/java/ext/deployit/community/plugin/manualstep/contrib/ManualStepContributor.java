@@ -21,7 +21,7 @@ import static com.google.common.collect.Maps.newHashMap;
 public class ManualStepContributor {
 
     @Contributor
-    public void triggerManualSteps(Deltas deltas, DeploymentPlanningContext ctx) {
+    public static void triggerManualSteps(Deltas deltas, DeploymentPlanningContext ctx) {
         Operation operation = determineDeploymentOperation(deltas);
         Map<String, Object> commonVars = newHashMap();
         commonVars.put("deltas", deltas);
@@ -38,7 +38,7 @@ public class ManualStepContributor {
         }
     }
 
-    private Operation determineDeploymentOperation(Deltas deltas) {
+    private static Operation determineDeploymentOperation(Deltas deltas) {
         Operation operation = Operation.MODIFY;
         int size = deltas.getDeltas().size();
         if(numberOfDeltasForOperation(deltas, Operation.CREATE) == size) {
@@ -51,7 +51,7 @@ public class ManualStepContributor {
         return operation;
     }
 
-    private int numberOfDeltasForOperation(Deltas deltas, final Operation operation) {
+    private static int numberOfDeltasForOperation(Deltas deltas, final Operation operation) {
         return Iterables.size(filter(deltas.getDeltas(), new Predicate<Delta>() {
             @Override
             public boolean apply(Delta input) {
